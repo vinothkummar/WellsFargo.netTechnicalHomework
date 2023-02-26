@@ -1,4 +1,4 @@
 # WellsFargo.netTechnicalHomework
 
 
-![My Image](images/homeworkapi.jpg)
+![My Image](../images/homeworkapi.jpg)
