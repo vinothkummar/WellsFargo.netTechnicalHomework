@@ -1,0 +1,4 @@
+CUSIP|PortfolioCode|Nominal|TransactionType
+CUSIP0001|p1|10|BUY
+CUSIP0002|p2|20|SELL
+CUSIP0001|p2|30|BUY
