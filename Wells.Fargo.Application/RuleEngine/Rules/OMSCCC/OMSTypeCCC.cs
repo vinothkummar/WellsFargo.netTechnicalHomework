@@ -15,19 +15,10 @@ namespace Wells.Fargo.Application.RuleEngine.Rules
     public class OMSTypeCCC : IOMSRuleEngineProcessor
     {     
 
-        public Task<Tuple<bool, string, string>> PortfolioTransactionProcessToOMSOutput(IList<Transaction> transactions, IList<Securities> Securities, IList<Portfolio> Portfolios, string folderPath)
+        public Task<Tuple<bool, string, string>> PortfolioTransactionProcessToOMSOutput(IEnumerable<Transaction> transactions, IEnumerable<Securities> Securities, IEnumerable<Portfolio> Portfolios, string folderPath)
         {
             try
-            {
-                //var csvFileOutput = transactions.Skip(1).Join(Securities.Skip(1), t => t.SecurityId, s => s.SecurityId, (t, s) => new { t, s })
-                //                            .Join(Portfolios.Skip(1), ts => ts.t.PortfolioId, p => p.PortfolioId, (ts, p) => new { ts, p })
-                //                            .Select(aaa => new
-                //                            {
-                //                                aaa.p.PortfolioCode,
-                //                                aaa.ts.s.Ticker,
-                //                                aaa.ts.t.Nominal,
-                //                                aaa.ts.t.TransactionType
-                //                            }).ToList();
+            {   
 
                 var csvFileOutput = PortfolioTransactionProcessDataToOMS(transactions, Securities, Portfolios);
 
@@ -51,7 +42,7 @@ namespace Wells.Fargo.Application.RuleEngine.Rules
             }
         }
 
-        public Func<IList<Transaction>, IList<Securities>, IList<Portfolio>, IEnumerable<dynamic>> PortfolioTransactionProcessDataToOMS = (IList<Transaction> transactions, IList<Securities> Securities, IList<Portfolio> Portfolios) =>
+        public Func<IEnumerable<Transaction>, IEnumerable<Securities>, IEnumerable<Portfolio>, IEnumerable<dynamic>> PortfolioTransactionProcessDataToOMS = (IEnumerable<Transaction> transactions, IEnumerable<Securities> Securities, IEnumerable<Portfolio> Portfolios) =>
                         transactions.Skip(1).Join(Securities.Skip(1), t => t.SecurityId, s => s.SecurityId, (t, s) => new { t, s })
                                     .Join(Portfolios.Skip(1), ts => ts.t.PortfolioId, p => p.PortfolioId, (ts, p) => new { ts, p })
                                      .Select(aaa => new

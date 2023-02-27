@@ -15,7 +15,7 @@ namespace Wells.Fargo.Application.RuleEngine.Rules
     public class OMSTypeBBB : IOMSRuleEngineProcessor
     {       
 
-        public Task<Tuple<bool, string, string>> PortfolioTransactionProcessToOMSOutput(IList<Transaction> transactions, IList<Securities> Securities, IList<Portfolio> Portfolios, string folderPath)
+        public Task<Tuple<bool, string, string>> PortfolioTransactionProcessToOMSOutput(IEnumerable<Transaction> transactions, IEnumerable<Securities> Securities, IEnumerable<Portfolio> Portfolios, string folderPath)
         {
 
             try
@@ -44,7 +44,7 @@ namespace Wells.Fargo.Application.RuleEngine.Rules
         }        
 
        
-        public Func<IList<Transaction>, IList<Securities>, IList<Portfolio>, IEnumerable<dynamic>> PortfolioTransactionProcessDataToOMS = (IList<Transaction> transactions, IList<Securities> Securities, IList<Portfolio> Portfolios) =>
+        public Func<IEnumerable<Transaction>, IEnumerable<Securities>, IEnumerable<Portfolio>, IEnumerable<dynamic>> PortfolioTransactionProcessDataToOMS = (IEnumerable<Transaction> transactions, IEnumerable<Securities> Securities, IEnumerable<Portfolio> Portfolios) =>
                         transactions.Join(Securities, t => t.SecurityId, s => s.SecurityId, (t, s) => new { t, s })
                                     .Join(Portfolios, ts => ts.t.PortfolioId, p => p.PortfolioId, (ts, p) => new { ts, p })
                                    .Select(aaa => new

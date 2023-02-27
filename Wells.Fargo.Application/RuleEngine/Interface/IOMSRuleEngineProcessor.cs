@@ -8,7 +8,7 @@ namespace Wells.Fargo.Application.RuleEngine.Interface
 {
     public interface IOMSRuleEngineProcessor
     {
-        Task<Tuple<bool, string, string>> PortfolioTransactionProcessToOMSOutput(IList<Transaction> transactions, IList<Securities> Securities, IList<Portfolio> Portfolios, string folderPath);
+        Task<Tuple<bool, string, string>> PortfolioTransactionProcessToOMSOutput(IEnumerable<Transaction> transactions, IEnumerable<Securities> Securities, IEnumerable<Portfolio> Portfolios, string folderPath);
 
     }
 }
